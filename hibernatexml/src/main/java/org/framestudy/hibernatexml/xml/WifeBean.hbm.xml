@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.framestudy.hibernatexml.o2o.WifeBean" table="t_wife">
+		<id name="id" column="id" type="string">
+			<generator class="uuid.hex"></generator>
+		</id>
+		
+		<property name="wifeName" column="wife_name" type="string" length="20"></property>
+	
+		<!-- 双向的关联 -->
+		<!-- property-ref="wife" 属性关联映射，用于关联属性之间，标记关联关系  -->
+		<one-to-one 
+			name="husband" 
+			class="org.framestudy.hibernatexml.o2o.HusbandBean" 
+			cascade="all" 
+			fetch="select" 
+			lazy="proxy" 
+			property-ref="wife">
+		</one-to-one>
+	
+		
+	
+	
+	
+	
+	
+	
+		
+	</class>
+</hibernate-mapping>

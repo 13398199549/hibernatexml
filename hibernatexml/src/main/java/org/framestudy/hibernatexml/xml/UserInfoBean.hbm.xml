@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.framestudy.hibernatexml.bean.UserInfoBean" table="t_user_info">
+		<cache usage="read-write"/>		
+		
+		<id name="id" column="id" type="long">
+			<generator class="increment"></generator>
+		</id>
+		<property name="idCard" column="id_card" type="string" length="20"></property>
+		<property name="educationLevel" column="education_level" type="int"></property>
+	</class>
+</hibernate-mapping>

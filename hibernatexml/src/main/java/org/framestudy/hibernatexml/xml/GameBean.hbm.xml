@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.framestudy.hibernatexml.m2m.GameBean" table="t_game">
+		<id name="id" column="id" type="long">
+			<generator class="identity"></generator>
+		</id>
+		
+		<property name="gameName" column="game_name" type="string" length="20"></property>
+		
+		
+		<!-- 配置many2many -->
+		<!-- 注意：table="t_player_game" 中间表 -->
+		<!-- inverse="true" 控制反转，交出关系维护的控制权 -->
+		<set name="players" cascade="none" fetch="select" 
+		lazy="true" table="t_player_game" inverse="true">
+			
+			<!-- column="fk_game_id" 配置游戏的外键 -->
+			<key column="fk_game_id"></key>
+			
+			<!-- column="fk_player_id" 配置玩家的外键 -->
+			<many-to-many class="org.framestudy.hibernatexml.m2m.PlayerBean" column="fk_player_id"></many-to-many>
+		
+		</set>
+		
+		
+		
+		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.framestudy.hibernatexml.extend.PetBean" table="t_pet">
+		<id name="id" column="id" type="long">
+			<generator class="identity"></generator>
+		</id>
+		
+		<!-- 定义鉴别器，鉴别器需要写在property之前,鉴别器的类型，在hibernate中必须是string -->
+		<discriminator column="pet_type" type="string"></discriminator>
+		
+		<property name="petName" column="pet_name" type="string" length="20"></property>
+	
+		<!-- 定义子类 -->
+		<subclass name="org.framestudy.hibernatexml.extend.CatBean" discriminator-value="0">
+			<property name="fish" column="fish" type="int"></property>
+		</subclass>
+		
+		<subclass name="org.framestudy.hibernatexml.extend.DogBean" discriminator-value="1">
+			<property name="bone" column="bone" type="int"></property>
+		</subclass>
+		
+		<subclass name="org.framestudy.hibernatexml.extend.SnakeBean" discriminator-value="2">
+			<property name="mouse" column="mouse" type="int"></property>
+		</subclass>
+		
+	</class>
+</hibernate-mapping>

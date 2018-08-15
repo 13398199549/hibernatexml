@@ -1,0 +1,25 @@
+<ehcache>
+	<!-- 指定缓存位置： java.io.tmpdir 内存临时目录，如果要改变位置：d:/ehcache-->
+    <diskStore path="java.io.tmpdir"/>
+    
+    <defaultCache
+        maxElementsInMemory="10000"
+        eternal="false"
+        timeToIdleSeconds="120"
+        timeToLiveSeconds="120"
+        overflowToDisk="true"
+        memoryStoreEvictionPolicy="LRU"
+        />
+        
+        <!-- maxElementsInMemory="10000" 缓存空间中，可以存放的元素的个数 -->
+		<!-- eternal="false" 设置存放的元素是否“常量” -->
+		<!--  timeToIdleSeconds="120" 没有调用的元素在缓存空间中，可以存活的最长时间，也被称之为：空闲时间，单位：秒 -->
+		<!-- timeToLiveSeconds="120" 被调用的元素在缓存空间中，重新激活的生存时间，也被称之为：钝化时间，单位：秒 -->
+		<!-- overflowToDisk="true" 当内存不足时，是否启动磁盘缓存 -->
+		<!--  memoryStoreEvictionPolicy=LRU 当缓存空间已满，有新的元素需要进入缓存空间时，缓存如何清理之前的元素，有
+		3种方式：
+			LRU 最近最少使用 （默认）
+			LFU 最少使用
+			FIFO 先进先出
+		 -->
+</ehcache>

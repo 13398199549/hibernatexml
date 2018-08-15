@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.framestudy.hibernatexml.m2m.PlayerBean" table="t_player">
+		
+		<id name="id" column="id" type="long">
+			<generator class="identity"></generator>
+		</id>
+		
+		<property name="playerName" column="player_name" type="string" length="20"></property>
+		
+		<!-- 配置many2many -->
+		<set name="games" cascade="none" fetch="select" lazy="true" table="t_player_game">
+			<key column="fk_player_id"></key>
+			<many-to-many class="org.framestudy.hibernatexml.m2m.GameBean" column="fk_game_id"></many-to-many>
+		</set>
+		
+	</class>
+</hibernate-mapping>

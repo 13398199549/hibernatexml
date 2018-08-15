@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.framestudy.hibernatexml.bean.UserBean" table="t_user" optimistic-lock="version">
+		<!-- 缓存数据的方式：
+		read-only 只读，一旦数据被缓存，那么这个数据在缓存中就不能修改
+		read-write 严格读写，缓存中如果需要修改某一个数据，那么缓存将针对这条数据进行加锁处理，以保证数据的一致性
+		nonstrict-read-write 非严格读写，缓存中如果需要修改某一个数据，缓存不需要针对这条数据进行加锁处理，换句话就是：我改我的，你读你的
+		"transactional" 事务缓存，跟逻辑事务相关，事务提交了，那么缓存中的对象做对应的修改，事务回滚了，缓存中的对象做对应的回滚
+		 -->
+		<cache usage="read-write"/>
+	
+		<id name="id" column="id" type="long">
+			<generator class="increment"></generator>
+			<!-- hibernate框架，常见的ID生成方式：
+			identity 数据库自增长，框架和应用程序不负责ID，适用数据库id类型为：int/bigint
+			increment 框架完成ID自增长，数据库和应用程序不负责ID，适用数据库id类型为：int/bigint
+			uuid.hex 通过使用计算机的网络地址，MAC地址，纳米级时间，CPU芯片编号等很多不易重复的东西，组合，然后使用特殊算法，得到的
+			一个32位的16进制的不易重复的数据
+			ansigned 应用程序调用对象的setId()来完成对ID的生成，框架和数据库不负责ID生成
+			foreign 外来的主键，一般用于主键描述双向1对1的情况下，比如：妻子的主键来至于丈夫表的主键
+			 -->
+		</id>
+		
+		<version name="version" column="version" type="integer"></version>
+		
+		<property name="userName" column="user_name" type="string" length="20"></property>
+
+		<property name="loginName" column="login_name" type="string" length="20"></property>
+	
+		<property name="password" column="password" type="string" length="32"></property>
+	
+		<property name="createTime" column="create_time" type="java.util.Date"></property>
+		  
+		<property name="updateTime" column="update_time" type="java.util.Date"></property>
+	
+		<!-- 单向One2One -->
+		<!-- fetch="join" 关联对象的加载，使用预加载
+		fetch="select" 关联对象的加载，使用即时加载
+		lazy="proxy"  关联对象的加载，在即时加载的基础上，修改为懒加载
+		 -->
+		 
+		<!-- unique="true" 将many2one修改成one2one -->
+		<!-- cascade 表示对象的级联， 同数据库的级联是一个意思
+			cascade="save-update" 表示关联对象做新增或者修改的时候，被关联的对象也需要随之变化
+			cascade="delete" 表示关联对象做删除时候，被关联的对象也需要随之删除
+			cascade="none" 表示关联对象做任何操作，被关联的对象都不需要同步变化
+			cascade="all" 表示关联对象做任何操作，被关联的对象都需要同步变化
+		 --> 
+		 
+		<many-to-one name="userInfo" 
+			class="org.framestudy.hibernatexml.bean.UserInfoBean" 
+			cascade="all" 
+			fetch="select" 
+			lazy="proxy" 
+			unique="true" 
+			column="fk_user_info_id"
+			>
+		</many-to-one>
+		
+		<!-- 单向One2Many -->
+		<!-- <key column="fk_user_id"></key> 关联键 -->
+		<set name="houses" fetch="select" lazy="true" cascade="all" >
+			<cache usage="read-write"/>
+			<key column="fk_user_id"></key>
+			<one-to-many class="org.framestudy.hibernatexml.bean.HouseBean"/>
+		</set>
+	
+	</class>
+</hibernate-mapping>

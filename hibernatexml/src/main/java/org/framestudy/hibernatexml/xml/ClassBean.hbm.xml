@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.framestudy.hibernatexml.o2m.ClassBean" table="t_class">
+		<id name="id" column="id" type="long">
+			<generator class="identity"></generator>
+		</id>
+	
+		<property name="className" column="class_name" type="string" length="20"></property>
+	
+		<!-- 双向one2many -->
+		<!-- inverse="true" 控制反转：将关联关系的维护权利，交给多的一方来进行维护 -->
+		<set name="students" cascade="none" fetch="select" lazy="true" inverse="true">
+			<key column="fk_class_id"></key>
+			<one-to-many class="org.framestudy.hibernatexml.o2m.StudentBean"/>
+		</set>
+		
+	</class>
+</hibernate-mapping>

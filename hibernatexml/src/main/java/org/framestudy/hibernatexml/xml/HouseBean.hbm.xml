@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.framestudy.hibernatexml.bean.HouseBean" table="t_house">
+		<cache usage="read-write"/>
+		
+		<id name="id" column="id" type="long">
+			<generator class="increment"></generator>
+		</id>
+		<property name="houseAddress" column="house_address" type="string" length="200"></property>
+		<property name="houseNo" column="house_no" type="string" length="12"></property>
+	</class>
+</hibernate-mapping>

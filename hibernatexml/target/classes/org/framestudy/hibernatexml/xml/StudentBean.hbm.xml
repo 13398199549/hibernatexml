@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.framestudy.hibernatexml.o2m.StudentBean" table="t_student">
+		<id name="id" column="id" type="long">
+			<generator class="identity"></generator>
+		</id>
+		<property name="studentName" column="student_name" type="string" length="20"></property>
+	
+		<!-- 双向one2many -->
+		<many-to-one 
+			name="cls" 
+			class="org.framestudy.hibernatexml.o2m.ClassBean" 
+			cascade="save-update" 
+			fetch="select" 
+			lazy="proxy" 
+			column="fk_class_id">
+		</many-to-one>
+	
+	</class>
+</hibernate-mapping>

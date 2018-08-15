@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+
+	<!-- 配置数据源的相关信息 -->
+	<session-factory>
+		<!-- 定义数据库的方言 -->
+		<property name="dialect">
+			org.hibernate.dialect.MySQLDialect
+			<!-- org.hibernate.dialect.OracleDialect -->
+			<!-- org.hibernate.dialect.SQLServerDialect -->
+		</property>
+
+		<!-- 配置JDBC连接数据库的4大元素 -->
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/hibernatexml?characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=GMT%2B8</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">admin</property>
+
+		<!-- 配置C3P0数据库连接池 -->
+		<property name="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>
+		<property name="hibernate.c3p0.max_size">50</property>
+		<property name="hibernate.c3p0.min_size">3</property>
+		<!-- 连接创建的超时时间 -->
+		<property name="hibernate.c3p0.timeout">5000</property>
+		<property name="hibernate.c3p0.max_statements">200</property>
+		<!-- 间隔多长时间，检测一次空闲连接 -->
+		<property name="hibernate.c3p0.idle_test_period">3000</property>
+		<!-- 当连接不够时，需要再次取得的连接数量 -->
+		<property name="hibernate.c3p0.acquire_increment">5</property>
+
+		<!-- 配置hibernate内置信息 -->
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+
+		<!-- 开启二级缓存 -->
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		<!-- 指定二级缓存提供类 -->
+		<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+		<!-- 开启查询缓存 -->
+		<property name="hibernate.cache.use_query_cache">true</property>
+
+		<!-- 注册ORM映射关系 -->
+		<mapping resource="org/framestudy/hibernatexml/xml/UserBean.hbm.xml" />
+		<mapping resource="org/framestudy/hibernatexml/xml/HouseBean.hbm.xml" />
+		<mapping resource="org/framestudy/hibernatexml/xml/UserInfoBean.hbm.xml" />
+		<mapping resource="org/framestudy/hibernatexml/xml/HusbandBean.hbm.xml" />
+		<mapping resource="org/framestudy/hibernatexml/xml/WifeBean.hbm.xml" />
+		<mapping resource="org/framestudy/hibernatexml/xml/StudentBean.hbm.xml" />
+		<mapping resource="org/framestudy/hibernatexml/xml/ClassBean.hbm.xml" />
+		<mapping resource="org/framestudy/hibernatexml/xml/GameBean.hbm.xml" />
+		<mapping resource="org/framestudy/hibernatexml/xml/PlayerBean.hbm.xml" />
+		<mapping resource="org/framestudy/hibernatexml/xml/PetBean.hbm.xml"/>
+	</session-factory>
+
+
+
+
+
+</hibernate-configuration>

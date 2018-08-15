@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.framestudy.hibernatexml.o2o.HusbandBean" table="t_husband">
+		
+		
+		<id name="id" column="id" type="string">
+			<generator class="uuid.hex"></generator>
+		</id>
+	
+		<property name="husbandName" column="husband_name" type="string" length="20"></property>
+		
+		<!-- 双向的关联 -->
+		<many-to-one 
+			name="wife" 
+			class="org.framestudy.hibernatexml.o2o.WifeBean" 
+			unique="true" 
+			cascade="all" 
+			fetch="select" 
+			lazy="proxy" 
+			column="fk_wife_id">
+		</many-to-one>
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	</class>
+</hibernate-mapping>
